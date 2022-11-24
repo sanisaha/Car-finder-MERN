@@ -22,10 +22,10 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithPopup(auth, provider);
     }
-    // const updateUserProfile = (profile) => {
-    //     setLoading(true);
-    //     return updateProfile(auth.currentUser, profile);
-    // }
+    const updateUserProfile = (profile) => {
+        setLoading(true);
+        return updateProfile(auth.currentUser, profile);
+    }
     const logOut = () => {
         localStorage.removeItem('carryYou-token');
         setLoading(true);
@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
 
     }, [])
 
-    const authInfo = { user, createNewUser, logOut, logIn, providerLogin, loading, setLoading };
+    const authInfo = { user, createNewUser, updateUserProfile, logOut, logIn, providerLogin, loading, setLoading };
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

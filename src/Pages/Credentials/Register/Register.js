@@ -1,10 +1,40 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const Register = () => {
+    const { createNewUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleUserCreate = (event) => {
+        event.preventDefault()
+        const name = event.target.name.value;
+        const photoURL = event.target.photoURL.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const userType = event.target.select.value;
+        createNewUser(email, password)
+            .then(result => {
+                const user = result.user;
+                handleUserProfileUpdate(name, photoURL, userType);
+                navigate('/');
+                console.log(user);
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+    }
+    const handleUserProfileUpdate = (name, photoURL, userType) => {
+        const profile = { displayName: name, photoURL: photoURL, userType: userType };
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(e => console.error(e))
+
+    }
     return (
         <div className="w-1/2 mx-auto my-10">
-            <form>
+            <form onSubmit={handleUserCreate}>
                 <div className="mb-6">
                     <input
                         type="text"
@@ -20,6 +50,7 @@ const Register = () => {
                         name='photoURL'
                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         placeholder="photoURL"
+                        required
                     />
                 </div>
                 <div className="mb-6">
