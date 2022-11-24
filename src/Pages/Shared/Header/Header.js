@@ -26,7 +26,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link className='btn'>login</Link>
+                <Link to='/login' className='btn'>login</Link>
             </div>
         </div>
     );
