@@ -1,0 +1,38 @@
+[
+    {
+        "name": "skoda-Octavia",
+        "location": "Lyon",
+        "conditionType": "good",
+        "gearBox": "automatic",
+        "type": "sedan",
+        "engine": "petrol",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUBMhIRIcLwkiPDMxXrDYJnPIXKAZXHJuCw&usqp=CAU",
+        "resalePrice": 12000,
+        "originalPrice": 30000,
+        "yearsOfUse": 9
+    },
+    {
+        "name": "Hyundai-Getz",
+        "location": "Lille",
+        "conditionType": "good",
+        "gearBox": "manual",
+        "type": "hatchBack",
+        "engine": "petrol",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw9tjPTQwJIERaTRSZgVosIeN4Wpzq9ax_Ug&usqp=CAU",
+        "resalePrice": 8000,
+        "originalPrice": 20000,
+        "yearsOfUse": 11
+    },
+    {
+        "name": "volkswagen-passat",
+        "location": "Paris",
+        "conditionType": "good",
+        "gearBox": "automatic",
+        "type": "sedan",
+        "engine": "diesel",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn7RJl_gRF4WBDmH9YhR7ZWCXpyy51Drx4Lg&usqp=CAU",
+        "resalePrice": 16000,
+        "originalPrice": 32000,
+        "yearsOfUse": 5
+    }
+]
