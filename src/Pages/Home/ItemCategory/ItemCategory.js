@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ItemCategory = () => {
+    const navigate = useNavigate();
     const handleCategory = (event) => {
         event.preventDefault()
-        console.log(event.target.select.value)
+        const category_name = event.target.select.value;
+        navigate(`/category/${category_name}`);
 
     }
 
