@@ -1,13 +1,41 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Login = () => {
     const { logIn, providerLogin } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    const handleLogIn = (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        logIn(email, password)
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+    const handleSocialSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
     return (
         <div className="w-1/2 mx-auto my-10 py-10">
-            <form>
+            <form onSubmit={handleLogIn}>
                 <div className="mb-6">
                     <input
                         type="email"
@@ -26,11 +54,10 @@ const Login = () => {
                 </div>
 
                 <div className="items-center mb-6">
-                    <a
-                        href="#!"
+                    <Link
+                        to=''
                         className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                    >Forgot password?</a
-                    >
+                    >Forgot password?</Link>
                 </div>
                 <button
                     type="submit"
@@ -47,7 +74,7 @@ const Login = () => {
                     <p className="text-center font-semibold mx-4 mb-0">OR</p>
                 </div>
                 <div className='w-full'>
-                    <Link className='btn w-full bg-green-400'>Google Login</Link>
+                    <Link onClick={handleSocialSignIn} className='btn w-full bg-green-400'>Google Login</Link>
                 </div>
                 <div>
                     <label className="label">
