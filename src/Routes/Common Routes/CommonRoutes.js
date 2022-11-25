@@ -2,6 +2,7 @@ import Main from "../../Layout/Main/Main";
 import CarsWithCategory from "../../Pages/CarCategory/CarsWithCategory";
 import Login from "../../Pages/Credentials/Login/Login";
 import Register from "../../Pages/Credentials/Register/Register";
+import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import Home from "../../Pages/Home/Home/Home";
 import PrivateRoutes from "../Private Routes/PrivateRoutes";
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([{
     {
         path: '/register',
         element: <Register></Register>
+    },
+    {
+        path: '/dashboard',
+        element: <DashBoard></DashBoard>
     }
     ]
 }])

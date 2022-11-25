@@ -10,8 +10,8 @@ const Header = () => {
     </>
     const privateMenuItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link>Blogs</Link></li>
-        <li><Link>Dashboard</Link></li>
+        <li><Link to='/blog'>Blogs</Link></li>
+        <li><Link to='/dashboard'>Dashboard</Link></li>
     </>
     const handleLogOut = () => {
         logOut();
