@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Register = () => {
     const { createNewUser, updateUserProfile } = useContext(AuthContext);
+    // const { userEmail, setUserEmail } = useState('');
     const navigate = useNavigate();
 
     const handleUserCreate = (event) => {
@@ -13,24 +14,51 @@ const Register = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         const userType = event.target.select.value;
+        const userDetails = {
+            name: name,
+            image: photoURL
+        }
+        const newUser = {
+            name: name,
+            email: email,
+            image: photoURL,
+            userType: userType
+        }
+
         createNewUser(email, password)
             .then(result => {
                 const user = result.user;
-                handleUserProfileUpdate(name, photoURL, userType);
-                navigate('/');
-                console.log(user);
+                updateUserProfile(userDetails)
+                    .then(() => {
+                        handleSaveUsersInDB(newUser);
+                    })
+                    .catch(e => console.error(e))
+
             })
             .catch(error => {
                 console.error(error)
             })
 
     }
-    const handleUserProfileUpdate = (name, photoURL, userType) => {
-        const profile = { displayName: name, photoURL: photoURL, userType: userType };
-        updateUserProfile(profile)
-            .then(() => { })
+    const handleSaveUsersInDB = profile => {
+        const newUser = {
+            name: profile.name,
+            photoURL: profile.photoURL,
+            email: profile.email,
+            userType: profile.userType
+        }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // setUserEmail(profile.email)
+            })
             .catch(e => console.error(e))
-
     }
     return (
         <div className="w-1/2 mx-auto my-10">
@@ -83,30 +111,14 @@ const Register = () => {
                     </select>
 
                 </div>
-
-                <div className="items-center mb-6">
-                    <Link
-                        to=''
-                        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                    >Forgot password?</Link>
-                </div>
                 <button
                     type="submit"
                     className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
                 >
-                    Sign in
+                    Register
                 </button>
-
-                <div
-                    className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
-                >
-                    <p className="text-center font-semibold mx-4 mb-0">OR</p>
-                </div>
-                <div className='w-full'>
-                    <Link className='btn w-full bg-green-400'>Google Login</Link>
-                </div>
                 <div>
                     <label className="label">
                         <p>already have an account? <Link to='/login' className='text-purple-700 font-semibold'>login</Link></p>
