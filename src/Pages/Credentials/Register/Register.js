@@ -15,8 +15,8 @@ const Register = () => {
         const password = event.target.password.value;
         const userType = event.target.select.value;
         const userDetails = {
-            name: name,
-            image: photoURL
+            displayName: name,
+            photoURL: photoURL
         }
         const newUser = {
             name: name,

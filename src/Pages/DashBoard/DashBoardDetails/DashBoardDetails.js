@@ -1,9 +1,14 @@
 import React from 'react';
+import MyOrders from '../MyOrders/MyOrders';
 
-const DashBoardDetails = () => {
+const DashBoardDetails = ({ bookings }) => {
     return (
         <div>
-            <h2>This is details</h2>
+            <div>
+                <MyOrders
+                    bookings={bookings}
+                ></MyOrders>
+            </div>
         </div>
     );
 };

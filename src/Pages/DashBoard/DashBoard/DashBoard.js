@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../../Context/AuthProvider';
 import DashBoardDetails from '../DashBoardDetails/DashBoardDetails';
 import DashBoardMenu from '../DashBoardMenu/DashBoardMenu';
 
 const DashBoard = () => {
+    const [bookings, setBookings] = useState([]);
+    const { user, setUser } = useState(null);
     const handleMyOrders = () => {
-        console.log('hello ratul')
+        fetch(`http://localhost:5000/bookings?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setBookings(data);
+            })
+            .catch(e => console.error(e))
 
     }
     return (
@@ -15,7 +23,9 @@ const DashBoard = () => {
                 ></DashBoardMenu>
             </div>
             <div className='flex-1'>
-                <DashBoardDetails></DashBoardDetails>
+                <DashBoardDetails
+                    bookings={bookings}
+                ></DashBoardDetails>
             </div>
         </div>
     );
