@@ -1,6 +1,22 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../Context/AuthProvider';
 
-const MyOrders = ({ bookings }) => {
+const MyOrders = () => {
+    const { user } = useContext(AuthContext);
+    const { data: bookings = [] } = useQuery({
+        queryKey: ['bookings', user?.email],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+                // headers: {
+                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+                // }
+            });
+            const data = await res.json();
+            return data;
+        }
+    })
+
     return (
         <div className="overflow-x-auto">
             <table className="table w-full">

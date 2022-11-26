@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
+import useSeller from '../../../Hooks/useSeller';
 import DashBoardDetails from '../DashBoardDetails/DashBoardDetails';
 import DashBoardMenu from '../DashBoardMenu/DashBoardMenu';
 
 const DashBoard = () => {
     const [bookings, setBookings] = useState([]);
-    const { user, setUser } = useState(null);
+    const { user } = useContext(AuthContext);
+    const [isSeller] = useSeller(user?.email);
     const handleMyOrders = () => {
         fetch(`http://localhost:5000/bookings?email=${user.email}`)
             .then(res => res.json())
@@ -18,9 +21,12 @@ const DashBoard = () => {
     return (
         <div className='flex justify-between'>
             <div>
-                <DashBoardMenu
-                    handleMyOrders={handleMyOrders}
-                ></DashBoardMenu>
+                <li><Link>my appoinments</Link></li>
+                {
+                    isSeller && <>
+                        <li><Link>all users</Link></li>
+                    </>
+                }
             </div>
             <div className='flex-1'>
                 <DashBoardDetails
