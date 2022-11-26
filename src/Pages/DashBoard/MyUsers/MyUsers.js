@@ -12,7 +12,7 @@ const MyUsers = () => {
     });
     const handleMakeAdmin = _id => {
         const userType = { admin: 'admin' };
-        fetch(`http://localhost:5000/users/${_id}`, {
+        fetch(`http://localhost:5000/users/admin/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -45,7 +45,7 @@ const MyUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
-                                <td>{buyer?.role !== 'admin' && <button onClick={() => handleMakeAdmin(buyer._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
+                                <td>{buyer?.userType !== 'I am a Buyer' && <button onClick={() => handleMakeAdmin(buyer._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
                             </tr>
                         )
                     }

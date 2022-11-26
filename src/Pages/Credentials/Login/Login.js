@@ -1,14 +1,25 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Login = () => {
     const { logIn, providerLogin } = useContext(AuthContext);
+    const [currentUser, setCurrentUser] = useState(null);
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+    useEffect(() => {
+
+        fetch(`http://localhost:5000/users`)
+            .then(res => res.json())
+            .then(data => {
+                setCurrentUser(data);
+            })
+    }
+        , [])
 
     const handleLogIn = (event) => {
         event.preventDefault();
@@ -27,12 +38,44 @@ const Login = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                navigate(from, { replace: true })
+                const existingUser = currentUser.find(x => x.email === user.email)
+                if (!existingUser) {
+                    const newUser = {
+                        name: user.displayName,
+                        email: user.email,
+                        userType: 'I am a Buyer'
+                    }
+                    handleSaveUsersInDB(newUser);
+
+                    navigate(from, { replace: true })
+                }
+
             })
             .catch(error => {
                 console.error(error)
             })
     }
+    const handleSaveUsersInDB = profile => {
+
+        const newUser = {
+            name: profile.name,
+            email: profile.email,
+            userType: profile.userType
+        }
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // setUserEmail(profile.email)
+            })
+            .catch(e => console.error(e))
+    }
+
 
     return (
         <div className="w-1/2 mx-auto my-10 py-10">

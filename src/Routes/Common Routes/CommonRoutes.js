@@ -29,21 +29,21 @@ const router = createBrowserRouter([{
     {
         path: '/register',
         element: <Register></Register>
-    },
-    {
+    }]
+},
+{
+    path: '/dashboard',
+    element: <DashboardLayout></DashboardLayout>,
+    children: [{
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
-        children: [{
-            path: '/dashboard',
-            element: <MyOrders></MyOrders>
-        },
+        element: <MyOrders></MyOrders>
+    },
 
-        {
-            path: '/dashboard/buyers',
-            element: <MyUsers></MyUsers>
-        }]
-    }
-    ]
-}])
+    {
+        path: '/dashboard/buyers',
+        element: <MyUsers></MyUsers>
+    }]
+}
+])
 
 export default router;
