@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-const MyUsers = () => {
+const MySellers = () => {
     const { data: buyers = [], refetch } = useQuery({
-        queryKey: ['buyers'],
+        queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers');
+            const res = await fetch('http://localhost:5000/sellers');
             const data = await res.json();
             return data;
         }
@@ -45,7 +45,7 @@ const MyUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
-                                <td>{buyer?.userType !== 'I am a Buyer' && <button onClick={() => handleMakeAdmin(buyer._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
+                                <td>{buyer?.userType !== 'admin' && <button onClick={() => handleMakeAdmin(buyer._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
                             </tr>
                         )
                     }
@@ -55,4 +55,4 @@ const MyUsers = () => {
     );
 };
 
-export default MyUsers;
+export default MySellers;

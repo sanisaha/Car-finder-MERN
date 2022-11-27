@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CarCard = ({ car, setCarItem }) => {
-    const { picture, name, location, resalePrice, originalPrice, yearsOfUse } = car;
+    const { picture, name, location, resalePrice, originalPrice, yearsOfUse, date, sellerName } = car;
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure className="px-10 pt-10">
@@ -15,6 +15,9 @@ const CarCard = ({ car, setCarItem }) => {
                 <p className='text-xl font-semibold p-3'>Resale Price: {resalePrice}</p>
                 <p className='text-xl font-semibold p-3'>Original Price: {originalPrice}</p>
                 <p className='text-xl font-semibold p-3'>Years of Use: {yearsOfUse}</p>
+                <p className='text-xl font-semibold p-3'>Posting time: {date}</p>
+                <p className='text-xl font-semibold p-3'>Seller Name: {sellerName}</p>
+
             </div>
             <div className="items-center text-center p-4">
                 <label onClick={() => setCarItem(car)} htmlFor="car-booking-modal" className="btn btn-primary">Book Now</label>
