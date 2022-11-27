@@ -1,5 +1,6 @@
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main/Main";
+import Blog from "../../Pages/Blogs/Blog";
 import CarsWithCategory from "../../Pages/CarCategory/CarsWithCategory";
 import Login from "../../Pages/Credentials/Login/Login";
 import Register from "../../Pages/Credentials/Register/Register";
@@ -60,6 +61,10 @@ const router = createBrowserRouter([{
         element: <AddAProduct></AddAProduct>
     }
     ]
+},
+{
+    path: '/blog',
+    element: <Blog></Blog>
 }
 ])
 

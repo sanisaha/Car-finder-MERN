@@ -43,7 +43,7 @@ const MyProducts = () => {
             mobileNumber,
             yearOfPurchase,
             description,
-            email,
+            sellerEmail: email,
             sellerName: userName,
             date: new Date()
         }

@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const BookingACar = ({ carItem, setCarItem }) => {
     const { user } = useContext(AuthContext);
-    const { name, resalePrice } = carItem;
+    const { _id, name, resalePrice, sellerEmail } = carItem;
     const handleCarBooking = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -15,7 +16,7 @@ const BookingACar = ({ carItem, setCarItem }) => {
         const meetingPlace = form.location.value;
         const phoneNumber = form.phoneNumber.value;
         const price = form.price.value;
-        const newBooking = { userName, carName, email, meetingPlace, phoneNumber, price };
+        const newBooking = { userName, sellerEmail, carName, email, meetingPlace, phoneNumber, price };
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
@@ -26,8 +27,29 @@ const BookingACar = ({ carItem, setCarItem }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    setCarItem(null);
-                    toast.success('your booking is confirmed');
+                    fetch('http://localhost:5000/bookedItems', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newBooking)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                fetch(`http://localhost:5000/cars/${_id}`, {
+                                    method: 'DELETE'
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (data.deletedCount > 0) {
+                                            setCarItem(null);
+                                            toast('your booking is confirmed');
+                                        }
+                                    })
+                            }
+                        })
+
                 }
             })
             .catch(e => console.error(e))
@@ -80,6 +102,7 @@ const BookingACar = ({ carItem, setCarItem }) => {
                         <div className="form-control mt-2 text-center">
                             <input type="submit" className="btn btn-primary px-10" value='Submit' />
                         </div>
+                        <ToastContainer></ToastContainer>
                     </form>
                 </div>
             </div>
