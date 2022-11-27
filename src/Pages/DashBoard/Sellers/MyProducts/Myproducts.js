@@ -55,23 +55,22 @@ const MyProducts = () => {
                 .catch(e => console.error(e))
         }
     }
+    const handleAdvertize = (id) => {
+        const action = { advertize: 'advertize' };
+        fetch(`http://localhost:5000/cars/item/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(action)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
 
+            })
 
-    // fetch('https://carry-you-server.vercel.app/reviews', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(product)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.acknowledged) {
-    //                 toast('your service has added successfully')
-    //                 form.reset();
-    //             }
-    //         })
-    //         .catch(e => console.error(e))
+    }
 
     return (
         <div>
@@ -101,7 +100,7 @@ const MyProducts = () => {
                                     <td>{product.mobileNumber}</td>
                                     <td>Available</td>
                                     <td><button onClick={() => (handleCompleteDelete(product._id))}>delete</button></td>
-                                    <td><button>Advertise</button></td>
+                                    <td><button onClick={() => (handleAdvertize(product._id))}>Advertize</button></td>
                                 </tr>
                             )
                         }

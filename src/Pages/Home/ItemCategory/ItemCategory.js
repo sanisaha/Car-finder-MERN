@@ -11,11 +11,11 @@ const ItemCategory = () => {
     }
 
     return (
-        <div>
-            <h2>Select a Category</h2>
+        <div className='p-6 mt-10 mr-4 bg-green-100'>
+            <h2 className='text-3xl font-semibold mb-4'>Select a Category</h2>
             <form onSubmit={handleCategory}>
                 <div className='form-control'>
-                    <select name='select' className="select select-error w-full max-w-xs">
+                    <select name='select' className="select select-accent text-xl">
                         <option>manual</option>
                         <option>automatic</option>
                         <option>sedan</option>
@@ -25,7 +25,7 @@ const ItemCategory = () => {
                     </select>
                 </div>
 
-                <div>
+                <div className='text-center mt-4'>
                     <input type="submit" className="btn btn-primary px-10" value='search' />
                 </div>
             </form>
