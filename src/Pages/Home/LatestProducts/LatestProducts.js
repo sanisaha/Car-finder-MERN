@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const LatestProducts = () => {
     const [latestProducts, setLatestProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/latest')
+        fetch('https://car-finder-server.vercel.app/latest')
             .then(res => res.json())
             .then(data => setLatestProducts(data))
             .catch(e => console.error(e))

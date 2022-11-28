@@ -5,7 +5,7 @@ const CarCard = ({ car, setCarItem }) => {
     const { picture, name, location, resalePrice, originalPrice, yearsOfUse, date, sellerName, sellerEmail } = car;
     const [verifyStatus, setVerifyStatus] = useState('');
     useEffect(() => {
-        fetch(`http://localhost:5000/verified?email=${sellerEmail}`)
+        fetch(`https://car-finder-server.vercel.app/verified?email=${sellerEmail}`)
             .then(res => res.json())
             .then(data => {
                 setVerifyStatus(data.status)

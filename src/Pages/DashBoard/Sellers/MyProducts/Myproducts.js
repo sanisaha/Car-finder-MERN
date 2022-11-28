@@ -10,7 +10,7 @@ const MyProducts = () => {
     const [availableProducts, setAvailAbleProducts] = useState([]);
     const [bookedProducts, setBookedProducts] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/cars/${user?.email}`)
+        fetch(`https://car-finder-server.vercel.app/cars/${user?.email}`)
             .then(res => res.json())
             .then(data => {
 
@@ -18,7 +18,7 @@ const MyProducts = () => {
             })
     }, [user])
     useEffect(() => {
-        fetch(`http://localhost:5000/bookedItems/${user?.email}`)
+        fetch(`https://car-finder-server.vercel.app/bookedItems/${user?.email}`)
             .then(res => res.json())
             .then(data => {
 
@@ -28,7 +28,7 @@ const MyProducts = () => {
     const handleCompleteDelete = (id) => {
         const proceed = window.confirm('are you really want to delete')
         if (proceed) {
-            fetch(`http://localhost:5000/cars/${id}`, {
+            fetch(`https://car-finder-server.vercel.app/cars/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -43,7 +43,7 @@ const MyProducts = () => {
     const handleDeleteFromBooking = (id) => {
         const proceed = window.confirm('are you really want to delete')
         if (proceed) {
-            fetch(`http://localhost:5000/bookedItems/${id}`, {
+            fetch(`https://car-finder-server.vercel.app/bookedItems/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -57,7 +57,7 @@ const MyProducts = () => {
     }
     const handleAdvertize = (id) => {
         const action = { advertize: 'advertize' };
-        fetch(`http://localhost:5000/cars/item/${id}`, {
+        fetch(`https://car-finder-server.vercel.app/cars/item/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

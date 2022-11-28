@@ -8,7 +8,7 @@ const MyUsers = () => {
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers');
+            const res = await fetch('https://car-finder-server.vercel.app/buyers');
             const data = await res.json();
             return data;
         }
@@ -16,7 +16,7 @@ const MyUsers = () => {
     const handleBuyerDelete = (id) => {
         const proceed = window.confirm('are you really want to delete')
         if (proceed) {
-            fetch(`http://localhost:5000/users/${id}`, {
+            fetch(`https://car-finder-server.vercel.app/users/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -30,7 +30,7 @@ const MyUsers = () => {
     }
     const handleMakeAdmin = _id => {
         const userType = { admin: 'admin' };
-        fetch(`http://localhost:5000/users/admin/${_id}`, {
+        fetch(`https://car-finder-server.vercel.app/users/admin/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

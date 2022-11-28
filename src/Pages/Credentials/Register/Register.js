@@ -46,7 +46,7 @@ const Register = () => {
             email: profile.email,
             userType: profile.userType
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://car-finder-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

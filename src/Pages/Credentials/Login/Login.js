@@ -13,7 +13,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
     useEffect(() => {
 
-        fetch(`http://localhost:5000/users`)
+        fetch(`https://car-finder-server.vercel.app/users`)
             .then(res => res.json())
             .then(data => {
                 setCurrentUser(data);
@@ -62,7 +62,7 @@ const Login = () => {
             email: profile.email,
             userType: profile.userType
         }
-        fetch('http://localhost:5000/users', {
+        fetch('https://car-finder-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -47,7 +47,7 @@ const MyProducts = () => {
             sellerName: userName,
             date: new Date()
         }
-        fetch('http://localhost:5000/cars', {
+        fetch('https://car-finder-server.vercel.app/cars', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

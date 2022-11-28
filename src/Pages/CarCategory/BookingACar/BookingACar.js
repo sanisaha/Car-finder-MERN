@@ -16,7 +16,7 @@ const BookingACar = ({ carItem, setCarItem }) => {
         const phoneNumber = form.phoneNumber.value;
         const price = form.price.value;
         const newBooking = { userName, sellerEmail, picture, carName, email, meetingPlace, phoneNumber, price };
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://car-finder-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -26,7 +26,7 @@ const BookingACar = ({ carItem, setCarItem }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    fetch('http://localhost:5000/bookedItems', {
+                    fetch('https://car-finder-server.vercel.app/bookedItems', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -36,7 +36,7 @@ const BookingACar = ({ carItem, setCarItem }) => {
                         .then(res => res.json())
                         .then(data => {
                             if (data.acknowledged) {
-                                fetch(`http://localhost:5000/cars/${_id}`, {
+                                fetch(`https://car-finder-server.vercel.app/cars/${_id}`, {
                                     method: 'DELETE'
                                 })
                                     .then(res => res.json())

@@ -7,7 +7,7 @@ import LatestProducts from '../LatestProducts/LatestProducts';
 const Home = () => {
     const [advertizeItems, setAdvertizeItems] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/advertize')
+        fetch('https://car-finder-server.vercel.app/advertize')
             .then(res => res.json())
             .then(data => setAdvertizeItems(data))
             .catch(e => console.error(e))
