@@ -101,10 +101,10 @@ const MyProducts = () => {
                                     <td>{product.resalePrice} $</td>
                                     <td>{product.mobileNumber}</td>
                                     <td>Available</td>
-                                    <td><button onClick={() => (handleCompleteDelete(product._id))}>delete</button></td>
+                                    <td><button className='btn btn-sm btn-primary' onClick={() => (handleCompleteDelete(product._id))}>delete</button></td>
                                     <td>{
                                         !product.action && <>
-                                            <button className='btn btn-primary' onClick={() => (handleAdvertize(product._id))}>Advertize</button>
+                                            <button className='btn btn-sm btn-primary' onClick={() => (handleAdvertize(product._id))}>Advertize</button>
                                         </>
                                     }</td>
                                 </tr>
@@ -115,7 +115,7 @@ const MyProducts = () => {
             </div>
             <div>
                 <div>
-                    <h2>Booked Items</h2>
+                    <h2>Booked Products</h2>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table w-full">
@@ -137,8 +137,17 @@ const MyProducts = () => {
                                         <td>{product.carName}</td>
                                         <td>{product.price} $</td>
                                         <td>{product.phoneNumber}</td>
-                                        <td>Sold</td>
-                                        <td><button onClick={() => (handleDeleteFromBooking(product._id))}>delete</button></td>
+                                        <td>{product.paid ? <><button className='btn btn-sm btn-primary disabled'>Sold</button></>
+                                            :
+                                            <><button className='btn btn-sm btn-primary disabled'>Booked</button></>
+                                        }
+                                        </td>
+                                        <td>{product.paid ? <><button className='btn btn-sm btn-primary disabled'></button></>
+                                            :
+                                            <><button className='btn btn-sm btn-primary' onClick={() => (handleDeleteFromBooking(product._id))}>delete</button></>
+                                        }
+                                        </td>
+
                                     </tr>
                                 )
                             }

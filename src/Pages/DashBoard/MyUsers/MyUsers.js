@@ -1,5 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const MyUsers = () => {
     const { data: buyers = [], refetch } = useQuery({
@@ -10,6 +13,21 @@ const MyUsers = () => {
             return data;
         }
     });
+    const handleBuyerDelete = (id) => {
+        const proceed = window.confirm('are you really want to delete')
+        if (proceed) {
+            fetch(`http://localhost:5000/users/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        toast("user deleted successfully");
+                    }
+                })
+                .catch(e => console.error(e))
+        }
+    }
     const handleMakeAdmin = _id => {
         const userType = { admin: 'admin' };
         fetch(`http://localhost:5000/users/admin/${_id}`, {
@@ -21,7 +39,7 @@ const MyUsers = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                toast('Make admin successful')
                 refetch();
             })
 
@@ -36,6 +54,7 @@ const MyUsers = () => {
                         <th>Name</th>
                         <th>email</th>
                         <th>Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,14 +62,16 @@ const MyUsers = () => {
                         buyers.map((buyer, index) =>
                             <tr key={index}>
                                 <th>{index + 1}</th>
-                                <td>{buyer.name}</td>
+                                <td>{buyer.displayName}</td>
                                 <td>{buyer.email}</td>
-                                <td>{buyer?.userType !== 'I am a Buyer' && <button onClick={() => handleMakeAdmin(buyer._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
+                                <td>{buyer?.userType !== 'admin' && <button onClick={() => handleMakeAdmin(buyer._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
+                                <td><button onClick={() => handleBuyerDelete(buyer._id)} className='btn btn-sm btn-primary'>delete</button></td>
                             </tr>
                         )
                     }
                 </tbody>
             </table>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

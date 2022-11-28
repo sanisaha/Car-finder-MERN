@@ -19,7 +19,7 @@ const Home = () => {
                 <div>
                     <ItemCategory></ItemCategory>
                 </div>
-                <div className=' lg:flex-1'>
+                <div className=''>
                     <h2 className='text-center text-3xl font-bold'>Latest deals</h2>
                     <LatestProducts></LatestProducts>
                 </div>
@@ -27,7 +27,7 @@ const Home = () => {
             </div>
             <div>
                 {
-                    advertizeItems.length && <>
+                    advertizeItems.length ? <>
                         <div className='bg-blue-100 py-20'>
                             <div>
                                 <h1 className='text-3xl font-semibold px-4'>Our most popular products...</h1>
@@ -41,6 +41,8 @@ const Home = () => {
                             </div>
                         </div>
                     </>
+                        :
+                        <></>
                 }
             </div>
         </div>

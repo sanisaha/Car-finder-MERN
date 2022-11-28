@@ -4,7 +4,6 @@ import { AuthContext } from '../../../Context/AuthProvider';
 
 const Register = () => {
     const { createNewUser, updateUserProfile } = useContext(AuthContext);
-    // const { userEmail, setUserEmail } = useState('');
     const navigate = useNavigate();
 
     const handleUserCreate = (event) => {
@@ -42,7 +41,7 @@ const Register = () => {
     }
     const handleSaveUsersInDB = profile => {
         const newUser = {
-            name: profile.name,
+            displayName: profile.name,
             photoURL: profile.photoURL,
             email: profile.email,
             userType: profile.userType
@@ -56,7 +55,9 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // setUserEmail(profile.email)
+                if (data.acknowledged) {
+                    navigate('/');
+                }
             })
             .catch(e => console.error(e))
     }

@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const BookingACar = ({ carItem, setCarItem }) => {
     const { user } = useContext(AuthContext);
-    const { _id, name, resalePrice, sellerEmail } = carItem;
+    const { _id, name, resalePrice, sellerEmail, picture } = carItem;
     const handleCarBooking = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -16,7 +15,7 @@ const BookingACar = ({ carItem, setCarItem }) => {
         const meetingPlace = form.location.value;
         const phoneNumber = form.phoneNumber.value;
         const price = form.price.value;
-        const newBooking = { userName, sellerEmail, carName, email, meetingPlace, phoneNumber, price };
+        const newBooking = { userName, sellerEmail, picture, carName, email, meetingPlace, phoneNumber, price };
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers: {
@@ -102,7 +101,6 @@ const BookingACar = ({ carItem, setCarItem }) => {
                         <div className="form-control mt-2 text-center">
                             <input type="submit" className="btn btn-primary px-10" value='Submit' />
                         </div>
-                        <ToastContainer></ToastContainer>
                     </form>
                 </div>
             </div>

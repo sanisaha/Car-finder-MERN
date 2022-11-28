@@ -6,11 +6,11 @@ const Header = () => {
     const { user, logOut } = useContext(AuthContext);
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link>Blogs</Link></li>
+        <li><Link to='/blog'>Blogs</Link></li>
     </>
     const privateMenuItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/blog'>Blogs</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/dashboard'>Dashboard</Link></li>
     </>
     const handleLogOut = () => {

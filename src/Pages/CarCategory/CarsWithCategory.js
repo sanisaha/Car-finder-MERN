@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import BookingACar from './BookingACar/BookingACar';
 import CarCard from './CarCard/CarCard';
 
@@ -8,7 +9,7 @@ const CarsWithCategory = () => {
     const [carItem, setCarItem] = useState(null);
     return (
         <section>
-            <div className='grid grid-cols-1 gap-4'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
                 {
                     cars.map(car => <CarCard
                         key={car._id}
@@ -25,6 +26,7 @@ const CarsWithCategory = () => {
                     ></BookingACar>
                 }
             </div>
+            <ToastContainer></ToastContainer>
         </section>
     );
 };

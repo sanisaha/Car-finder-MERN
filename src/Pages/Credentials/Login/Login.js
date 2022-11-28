@@ -41,7 +41,7 @@ const Login = () => {
                 const existingUser = currentUser.find(x => x.email === user.email)
                 if (!existingUser) {
                     const newUser = {
-                        name: user.displayName,
+                        displayName: user.displayName,
                         email: user.email,
                         userType: 'I am a Buyer'
                     }
@@ -58,7 +58,7 @@ const Login = () => {
     const handleSaveUsersInDB = profile => {
 
         const newUser = {
-            name: profile.name,
+            displayName: profile.displayName,
             email: profile.email,
             userType: profile.userType
         }
@@ -71,7 +71,6 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // setUserEmail(profile.email)
             })
             .catch(e => console.error(e))
     }
@@ -95,13 +94,6 @@ const Login = () => {
                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         placeholder="Password"
                     />
-                </div>
-
-                <div className="items-center mb-6">
-                    <Link
-                        to=''
-                        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                    >Forgot password?</Link>
                 </div>
                 <button
                     type="submit"

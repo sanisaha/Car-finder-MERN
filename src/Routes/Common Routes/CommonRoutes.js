@@ -8,9 +8,11 @@ import MyDashboard from "../../Pages/DashBoard/MyDashboard/MyDashboard";
 import MyOrders from "../../Pages/DashBoard/MyOrders/MyOrders";
 import MySellers from "../../Pages/DashBoard/MySellers/MySellers";
 import MyUsers from "../../Pages/DashBoard/MyUsers/MyUsers";
+import Payment from "../../Pages/DashBoard/Payment/Payment/Payment";
 import AddAProduct from "../../Pages/DashBoard/Sellers/AddAProduct/AddAProduct";
 import Myproducts from "../../Pages/DashBoard/Sellers/MyProducts/Myproducts";
 import Home from "../../Pages/Home/Home/Home";
+import Error from "../../Pages/Other/Error";
 import PrivateRoutes from "../Private Routes/PrivateRoutes";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -59,12 +61,21 @@ const router = createBrowserRouter([{
     {
         path: '/dashboard/add',
         element: <AddAProduct></AddAProduct>
+    },
+    {
+        path: '/dashboard/payment/:id',
+        element: <Payment></Payment>,
+        loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
     }
     ]
 },
 {
     path: '/blog',
     element: <Blog></Blog>
+},
+{
+    path: '*',
+    element: <Error></Error>
 }
 ])
 
