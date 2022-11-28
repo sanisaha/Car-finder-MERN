@@ -66,7 +66,9 @@ const MyProducts = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                if (data.modifiedCount > 0) {
+                    alert('item set for advertize')
+                }
 
             })
 
@@ -100,7 +102,11 @@ const MyProducts = () => {
                                     <td>{product.mobileNumber}</td>
                                     <td>Available</td>
                                     <td><button onClick={() => (handleCompleteDelete(product._id))}>delete</button></td>
-                                    <td><button onClick={() => (handleAdvertize(product._id))}>Advertize</button></td>
+                                    <td>{
+                                        !product.action && <>
+                                            <button className='btn btn-primary' onClick={() => (handleAdvertize(product._id))}>Advertize</button>
+                                        </>
+                                    }</td>
                                 </tr>
                             )
                         }
