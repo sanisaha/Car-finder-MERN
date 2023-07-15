@@ -11,7 +11,7 @@ const ItemCategory = () => {
     }
 
     return (
-        <div className='p-6 mt-10 mr-4 bg-green-100'>
+        <div className='p-2'>
             <h2 className='text-3xl font-semibold mb-4'>Select a Category</h2>
             <form onSubmit={handleCategory}>
                 <div className='form-control'>

@@ -15,12 +15,13 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <div className='lg:flex justify-between mt-5'>
-                <div>
+            <h2 className='text-center text-3xl font-bold p-4'>Latest deals</h2>
+            <div className='p-2 border'>
+                <div className=''>
                     <ItemCategory></ItemCategory>
                 </div>
-                <div className=''>
-                    <h2 className='text-center text-3xl font-bold'>Latest deals</h2>
+                <div className='mt-2'>
+
                     <LatestProducts></LatestProducts>
                 </div>
 
@@ -28,11 +29,11 @@ const Home = () => {
             <div>
                 {
                     advertizeItems.length ? <>
-                        <div className='bg-blue-100 py-20'>
+                        <div className='bg-blue-100 pb-10'>
                             <div>
-                                <h1 className='text-3xl font-semibold px-4'>Our most popular products...</h1>
+                                <h1 className='text-3xl font-semibold p-4 text-center animate-pulse'>Our most popular products</h1>
                             </div>
-                            <div className='grid gap-2 grid-cols-1 lg:grid-cols-3'>
+                            <div className='grid gap-4 grid-cols-1 lg:grid-cols-3 p-2'>
 
                                 {advertizeItems.map(advertizeItem => <AdvertizedItems
                                     key={advertizeItem._id}
