@@ -33,7 +33,7 @@ const Home = () => {
                             <div>
                                 <h1 className='text-3xl font-semibold p-4 text-center animate-pulse'>Our most popular products</h1>
                             </div>
-                            <div className='grid gap-4 grid-cols-1 lg:grid-cols-3 p-2'>
+                            <div className='grid gap-4 grid-cols-1 lg:grid-cols-2 p-2'>
 
                                 {advertizeItems.map(advertizeItem => <AdvertizedItems
                                     key={advertizeItem._id}
