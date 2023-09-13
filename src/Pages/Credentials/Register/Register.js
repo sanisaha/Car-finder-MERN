@@ -1,10 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Register = () => {
-    const { createNewUser, updateUserProfile } = useContext(AuthContext);
+    const { createNewUser, updateUserProfile, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState(null);
+    useEffect(() => {
+
+        fetch(`https://car-finder-server.vercel.app/users`)
+            .then(res => res.json())
+            .then(data => {
+                setCurrentUser(data);
+            })
+    }
+        , [])
 
     const handleUserCreate = (event) => {
         event.preventDefault()
@@ -26,16 +36,19 @@ const Register = () => {
 
         createNewUser(email, password)
             .then(result => {
+                logOut();
                 const user = result.user;
-                updateUserProfile(userDetails)
-                    .then(() => {
-                        handleSaveUsersInDB(newUser);
-                    })
-                    .catch(e => console.error(e))
-
+                const existingUser = currentUser.find(x => x.email === user.email)
+                if (!existingUser) {
+                    updateUserProfile(userDetails)
+                        .then(() => {
+                            handleSaveUsersInDB(newUser);
+                        })
+                        .catch(e => console.error(e))
+                }
             })
             .catch(error => {
-                console.error(error)
+                document.getElementById('error').innerHTML = error.message;
             })
 
     }
@@ -56,7 +69,9 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    navigate('/');
+                    navigate('/login');
+                } else {
+                    <p>Loading....</p>
                 }
             })
             .catch(e => console.error(e))
@@ -120,6 +135,7 @@ const Register = () => {
                 >
                     Register
                 </button>
+                <p id='error' className='text-red-500'></p>
                 <div>
                     <label className="label">
                         <p>already have an account? <Link to='/login' className='text-purple-700 font-semibold'>login</Link></p>
