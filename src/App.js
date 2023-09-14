@@ -4,7 +4,7 @@ import router from './Routes/Common Routes/CommonRoutes';
 
 function App() {
   return (
-    <div className='w-4/5 mx-auto'>
+    <div className=''>
       <RouterProvider router={router}>
 
       </RouterProvider>

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
+import { AuthContext } from '../../../Context/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const CarCard = ({ car, setCarItem }) => {
     const { picture, name, location, resalePrice, originalPrice, yearsOfUse, date, sellerName, sellerEmail } = car;
+    const { user } = useContext(AuthContext);
     const [verifyStatus, setVerifyStatus] = useState('');
     useEffect(() => {
         fetch(`https://car-finder-server.vercel.app/verified?email=${sellerEmail}`)
@@ -13,33 +16,58 @@ const CarCard = ({ car, setCarItem }) => {
             .catch(e => console.error(e))
     }, [sellerEmail])
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
-            <figure className="px-10 pt-10">
-                <img src={picture} alt="car" className="rounded-xl" />
-            </figure>
-            <div className="card-body items-center text-center">
-                <h2 className="card-title text-2xl">{name}</h2>
+        <div>
+            <div className='flex justify-between mx-10'>
+                <h1 className='text-4xl font-bold'>{name}</h1>
+                <div>
+                    <p className='text-2xl text-warning font-extrabold'>{resalePrice}</p>
+                </div>
             </div>
-            <div>
-                <p className='text-xl font-semibold p-3'>Location: {location}</p>
-                <p className='text-xl font-semibold p-3'>Resale Price: {resalePrice}</p>
-                <p className='text-xl font-semibold p-3'>Original Price: {originalPrice}</p>
-                <p className='text-xl font-semibold p-3'>Years of Use: {yearsOfUse}</p>
-                <p className='text-xl font-semibold p-3'>Posting time: {date}</p>
-                <div className='flex items-center'>
-                    <div>
-                        <p className='text-xl font-semibold p-3'>Seller Name: {sellerName}</p>
+            <div className="card lg:card-side bg-base-100 shadow-xl p-4">
+                <figure><img src={picture} alt="Album" /></figure>
+                <div className="card-body">
+                    <h2 className="card-title">Description</h2>
+                    <div className='flex flex-row justify-start'>
+                        <div><p>Location: </p></div>
+                        <div>{location}</div>
+                    </div>
+                    <div className='flex flex-row justify-start'>
+                        <div><p>Resale Price: </p></div>
+                        <div>{resalePrice}</div>
+                    </div>
+                    <div className='flex flex-row justify-start'>
+                        <div><p>Original Price: </p></div>
+                        <div>{originalPrice}</div>
+                    </div>
+                    <div className='flex flex-row justify-start'>
+                        <div><p>Years Of Use: </p></div>
+                        <div>{yearsOfUse}</div>
+                    </div>
+                    <div className='flex flex-row justify-start'>
+                        <div><p>Posting Time: </p></div>
+                        <div>{date.slice(0, 10)}</div>
+                    </div>
+                    <div className='flex flex-row justify-start'>
+                        <div><p>Seller Name: </p></div>
+                        <div>{sellerName}</div>
+                    </div>
+                    <div className='flex flex-row justify-start'>
+                        <div><p>Seller Status: </p></div>
+                        <div>{
+                            verifyStatus ? <FaCheck className='bg-blue-300 rounded text-lg' />
+                                : <p>N/A</p>}</div>
                     </div>
 
-                    <div>{
-                        verifyStatus && <FaCheck className='bg-blue-300 rounded text-lg' />
-                    }</div>
+
                 </div>
+                <div className="items-center text-center p-4">
+                    {
+                        user ? <label onClick={() => setCarItem(car)} htmlFor="car-booking-modal" className="btn btn-primary">Book Now</label>
+                            :
+                            <Link to='/login' className='btn btn-primary'>Book Now</Link>
+                    }
 
-
-            </div>
-            <div className="items-center text-center p-4">
-                <label onClick={() => setCarItem(car)} htmlFor="car-booking-modal" className="btn btn-primary">Book Now</label>
+                </div>
             </div>
         </div>
     );

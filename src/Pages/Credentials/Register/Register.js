@@ -77,7 +77,7 @@ const Register = () => {
             .catch(e => console.error(e))
     }
     return (
-        <div className="w-1/2 mx-auto my-10">
+        <div className="w-1/2 mx-auto my-10 min-h-screen">
             <form onSubmit={handleUserCreate}>
                 <div className="mb-6">
                     <input

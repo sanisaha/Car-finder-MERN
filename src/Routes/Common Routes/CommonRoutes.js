@@ -25,9 +25,9 @@ const router = createBrowserRouter([{
         element: <Home></Home>
     },
     {
-        path: '/category/:id',
-        element: <PrivateRoutes><CarsWithCategory></CarsWithCategory></PrivateRoutes>,
-        loader: ({ params }) => fetch(`https://car-finder-server.vercel.app/category/${params.id}`)
+        path: '/carItems',
+        element: <CarsWithCategory></CarsWithCategory>,
+        loader: () => fetch(`https://car-finder-server.vercel.app/advertize`)
     },
     {
         path: '/login',

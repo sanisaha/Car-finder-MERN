@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-const LatestProducts = () => {
+const CategoryProducts = ({ category }) => {
     const [latestProducts, setLatestProducts] = useState([]);
     useEffect(() => {
-        fetch('https://car-finder-server.vercel.app/advertize')
+        fetch(`https://car-finder-server.vercel.app/category/${category}`)
             .then(res => res.json())
             .then(data => setLatestProducts(data))
             .catch(e => console.error(e))
-    }, [])
+    }, [category])
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-4 gap-2'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
             {
                 latestProducts.map(latestProduct =>
                     <div className="" key={latestProduct._id}>
@@ -35,4 +35,4 @@ const LatestProducts = () => {
     );
 };
 
-export default LatestProducts;
+export default CategoryProducts;
