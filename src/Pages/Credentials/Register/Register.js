@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../Context/AuthProvider';
+import { AuthContext, baseURL } from '../../../Context/AuthProvider';
 
 const Register = () => {
     const { createNewUser, updateUserProfile, logOut } = useContext(AuthContext);
@@ -8,7 +8,7 @@ const Register = () => {
     const [currentUser, setCurrentUser] = useState(null);
     useEffect(() => {
 
-        fetch(`https://car-finder-server.vercel.app/users`)
+        fetch(`${baseURL}/users`)
             .then(res => res.json())
             .then(data => {
                 setCurrentUser(data);
@@ -59,7 +59,7 @@ const Register = () => {
             email: profile.email,
             userType: profile.userType
         }
-        fetch('https://car-finder-server.vercel.app/users', {
+        fetch(`${baseURL}/users`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

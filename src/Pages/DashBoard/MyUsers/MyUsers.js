@@ -3,12 +3,13 @@ import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
+import { baseURL } from '../../../Context/AuthProvider';
 
 const MyUsers = () => {
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('https://car-finder-server.vercel.app/buyers');
+            const res = await fetch(`${baseURL}/buyers`);
             const data = await res.json();
             return data;
         }
@@ -16,7 +17,7 @@ const MyUsers = () => {
     const handleBuyerDelete = (id) => {
         const proceed = window.confirm('are you really want to delete')
         if (proceed) {
-            fetch(`https://car-finder-server.vercel.app/users/${id}`, {
+            fetch(`${baseURL}/users/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -30,7 +31,7 @@ const MyUsers = () => {
     }
     const handleMakeAdmin = _id => {
         const userType = { admin: 'admin' };
-        fetch(`https://car-finder-server.vercel.app/users/admin/${_id}`, {
+        fetch(`${baseURL}/users/admin/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

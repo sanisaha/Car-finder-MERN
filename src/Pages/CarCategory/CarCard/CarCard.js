@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
-import { AuthContext } from '../../../Context/AuthProvider';
+import { AuthContext, baseURL } from '../../../Context/AuthProvider';
 import { Link } from 'react-router-dom';
 
 const CarCard = ({ car, setCarItem }) => {
@@ -8,7 +8,7 @@ const CarCard = ({ car, setCarItem }) => {
     const { user } = useContext(AuthContext);
     const [verifyStatus, setVerifyStatus] = useState('');
     useEffect(() => {
-        fetch(`https://car-finder-server.vercel.app/verified?email=${sellerEmail}`)
+        fetch(`${baseURL}/verified?email=${sellerEmail}`)
             .then(res => res.json())
             .then(data => {
                 setVerifyStatus(data.status)

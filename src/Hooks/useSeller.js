@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
+import { baseURL } from "../Context/AuthProvider";
 
 const useSeller = email => {
     const [isSeller, setIsSeller] = useState(false);
     const [isSellerLoading, setIsSellerLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`https://car-finder-server.vercel.app/users/seller/${email}`)
+            fetch(`${baseURL}/users/seller/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsSeller(data.isSeller);

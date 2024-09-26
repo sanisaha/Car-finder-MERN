@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { baseURL } from '../../../../Context/AuthProvider';
 const Checkout = ({ booking }) => {
 
     const stripe = useStripe();
@@ -13,7 +14,7 @@ const Checkout = ({ booking }) => {
     const [clientSecret, setClientSecret] = useState("");
     const { price, _id, email } = booking;
     useEffect(() => {
-        fetch("https://car-finder-server.vercel.app/create-payment-intent", {
+        fetch(`${baseURL}/create-payment-intent`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +76,7 @@ const Checkout = ({ booking }) => {
                 email,
                 bookingId: _id
             }
-            fetch('https://car-finder-server.vercel.app/payments', {
+            fetch(`${baseURL}/payments`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
