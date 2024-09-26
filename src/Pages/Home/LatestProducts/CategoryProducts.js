@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { baseURL } from '../../../Context/AuthProvider';
 
 const CategoryProducts = ({ category }) => {
     const [latestProducts, setLatestProducts] = useState([]);
     useEffect(() => {
-        fetch(`https://car-finder-server.vercel.app/category/${category}`)
+        fetch(`${baseURL}/category/${category}`)
             .then(res => res.json())
             .then(data => setLatestProducts(data))
             .catch(e => console.error(e))

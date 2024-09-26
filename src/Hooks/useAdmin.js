@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
+import { baseURL } from "../Context/AuthProvider";
 
 const useAdmin = email => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isAdminLoading, setIsAdminLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`https://car-finder-server.vercel.app/users/admin/${email}`)
+            fetch(`${baseURL}/users/admin/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsAdmin(data.isAdmin);

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../../../../Context/AuthProvider';
+import { AuthContext, baseURL } from '../../../../Context/AuthProvider';
 
 
 const MyProducts = () => {
@@ -47,7 +47,7 @@ const MyProducts = () => {
             sellerName: userName,
             date: new Date()
         }
-        fetch('https://car-finder-server.vercel.app/cars', {
+        fetch(`${baseURL}/cars`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

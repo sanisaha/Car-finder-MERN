@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../../Context/AuthProvider';
+import { AuthContext, baseURL } from '../../../../Context/AuthProvider';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
@@ -10,7 +10,7 @@ const MyProducts = () => {
     const [availableProducts, setAvailAbleProducts] = useState([]);
     const [bookedProducts, setBookedProducts] = useState([]);
     useEffect(() => {
-        fetch(`https://car-finder-server.vercel.app/cars/${user?.email}`)
+        fetch(`${baseURL}/cars/${user?.email}`)
             .then(res => res.json())
             .then(data => {
 
@@ -18,7 +18,7 @@ const MyProducts = () => {
             })
     }, [user])
     useEffect(() => {
-        fetch(`https://car-finder-server.vercel.app/bookedItems/${user?.email}`)
+        fetch(`${baseURL}/bookedItems/${user?.email}`)
             .then(res => res.json())
             .then(data => {
 
@@ -28,7 +28,7 @@ const MyProducts = () => {
     const handleCompleteDelete = (id) => {
         const proceed = window.confirm('are you really want to delete')
         if (proceed) {
-            fetch(`https://car-finder-server.vercel.app/cars/${id}`, {
+            fetch(`${baseURL}/cars/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -43,7 +43,7 @@ const MyProducts = () => {
     const handleDeleteFromBooking = (id) => {
         const proceed = window.confirm('are you really want to delete')
         if (proceed) {
-            fetch(`https://car-finder-server.vercel.app/bookedItems/${id}`, {
+            fetch(`${baseURL}/bookedItems/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -57,7 +57,7 @@ const MyProducts = () => {
     }
     const handleAdvertize = (id) => {
         const action = { advertize: 'advertize' };
-        fetch(`https://car-finder-server.vercel.app/cars/item/${id}`, {
+        fetch(`${baseURL}/cars/item/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

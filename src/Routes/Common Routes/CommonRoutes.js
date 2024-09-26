@@ -1,3 +1,4 @@
+import { baseURL } from "../../Context/AuthProvider";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main/Main";
 import Blog from "../../Pages/Blogs/Blog";
@@ -27,7 +28,7 @@ const router = createBrowserRouter([{
     {
         path: '/carItems',
         element: <CarsWithCategory></CarsWithCategory>,
-        loader: () => fetch(`https://car-finder-server.vercel.app/advertize`)
+        loader: () => fetch(`${baseURL}/advertize`)
     },
     {
         path: '/login',
@@ -65,7 +66,7 @@ const router = createBrowserRouter([{
     {
         path: '/dashboard/payment/:id',
         element: <Payment></Payment>,
-        loader: ({ params }) => fetch(`https://car-finder-server.vercel.app/bookings/${params.id}`)
+        loader: ({ params }) => fetch(`${baseURL}/bookings/${params.id}`)
     }
     ]
 },

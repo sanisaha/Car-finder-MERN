@@ -4,13 +4,14 @@ import Banner from '../Banner/Banner';
 import ItemCategory from '../ItemCategory/ItemCategory';
 import LatestProducts from '../LatestProducts/LatestProducts';
 import CategoryProducts from '../LatestProducts/CategoryProducts';
+import { baseURL } from '../../../Context/AuthProvider';
 
 const Home = () => {
     const [advertizeItems, setAdvertizeItems] = useState([]);
     const [category, setCategory] = useState('');
 
     useEffect(() => {
-        fetch('https://car-finder-server.vercel.app/latest')
+        fetch(`${baseURL}/latest`)
             .then(res => res.json())
             .then(data => setAdvertizeItems(data))
             .catch(e => console.error(e))

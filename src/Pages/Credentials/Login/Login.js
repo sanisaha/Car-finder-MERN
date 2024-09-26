@@ -2,7 +2,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../Context/AuthProvider';
+import { AuthContext, baseURL } from '../../../Context/AuthProvider';
 
 const Login = () => {
     const { logIn, providerLogin } = useContext(AuthContext);
@@ -13,7 +13,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
     useEffect(() => {
 
-        fetch(`https://car-finder-server.vercel.app/users`)
+        fetch(`${baseURL}/users`)
             .then(res => res.json())
             .then(data => {
                 setCurrentUser(data);
@@ -62,7 +62,7 @@ const Login = () => {
             email: profile.email,
             userType: profile.userType
         }
-        fetch('https://car-finder-server.vercel.app/users', {
+        fetch(`${baseURL}/users`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
