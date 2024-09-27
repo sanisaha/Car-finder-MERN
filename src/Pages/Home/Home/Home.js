@@ -5,7 +5,6 @@ import ItemCategory from '../ItemCategory/ItemCategory';
 import LatestProducts from '../LatestProducts/LatestProducts';
 import CategoryProducts from '../LatestProducts/CategoryProducts';
 import { baseURL } from '../../../Context/AuthProvider';
-
 const Home = () => {
     const [advertizeItems, setAdvertizeItems] = useState([]);
     const [category, setCategory] = useState('');
@@ -29,7 +28,7 @@ const Home = () => {
 
     return (
         <div>
-            <Banner></Banner>
+            <div className=' mb-48'><Banner></Banner></div>
             <div className='mx-10'>
                 <div className='flex flex-row items-center justify-between p-4'>
                     <h1 className='text-2xl'>Featured Cars</h1>

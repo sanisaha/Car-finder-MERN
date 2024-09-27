@@ -14,6 +14,7 @@ import AddAProduct from "../../Pages/DashBoard/Sellers/AddAProduct/AddAProduct";
 import Myproducts from "../../Pages/DashBoard/Sellers/MyProducts/Myproducts";
 import Home from "../../Pages/Home/Home/Home";
 import Error from "../../Pages/Other/Error";
+import SearchPage from "../../Pages/SearchPage/SearchPage";
 import PrivateRoutes from "../Private Routes/PrivateRoutes";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -37,7 +38,12 @@ const router = createBrowserRouter([{
     {
         path: '/register',
         element: <Register></Register>
-    }]
+    },
+    {
+        path: '/search',
+        element: <SearchPage></SearchPage>,
+    }    
+]
 },
 {
     path: '/dashboard',

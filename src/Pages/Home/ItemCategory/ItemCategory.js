@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
 const ItemCategory = ({ handleCategory }) => {
     const [active, setActive] = useState('btn-disabled');
-    const navigate = useNavigate();
     const handleSearchButton = (event) => {
         event.preventDefault()
         const category_name = event.target.value;

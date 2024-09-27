@@ -37,16 +37,17 @@ const MyProducts = () => {
             gearBox,
             type,
             engine,
-            resalePrice,
-            originalPrice,
-            yearsOfUse,
+            resalePrice: parseInt(resalePrice),
+            originalPrice: parseInt(originalPrice),
+            yearsOfUse: parseInt(yearsOfUse),
             mobileNumber,
-            yearOfPurchase,
+            yearOfPurchase: parseInt(yearOfPurchase),
             description,
             sellerEmail: email,
             sellerName: userName,
             date: new Date()
         }
+
         fetch(`${baseURL}/cars`, {
             method: 'POST',
             headers: {
