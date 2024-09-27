@@ -6,16 +6,24 @@ import carImage from '../../../assets/images/banner_1920.webp';
 const Banner = () => {
     const navigate = useNavigate();
 
-  const [year, setYear] = useState("2017");
-  const [make, setMake] = useState("Bentley");
-  const [model, setModel] = useState("Bentayga");
-  const [mileage, setMileage] = useState("20000");
-  const [transmission, setTransmission] = useState("7-Speed Automatic");
-  const [condition, setCondition] = useState("New");
-  const [price, setPrice] = useState([0, 100000]);
+    const [filters, setFilters] = useState({
+        type: '',
+        gearBox: '',
+        engine: '',
+        conditionType: '',
+        minResalePrice: 0,
+        maxResalePrice: 100000,
+        minYear: 2000,
+        maxYear: 2023,
+});
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFilters({ ...filters, [name]: value });
+    };
 
   const handleSearch = () => {
-    navigate("/search");
+    navigate("/search", { state: { filters } });
   };
     return (
         <div className="relative">
@@ -32,83 +40,55 @@ const Banner = () => {
         <div className="absolute inset-x-0 bottom-0 left-1/2 transform translate-x-[-50%] translate-y-1/2 p-4 w-3/4 mx-auto bg-white shadow-md">
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label>Select Year</label>
+              <label>Select Type</label>
               <select
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
+                name="type" value={filters.type} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               >
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                {/* Add more years */}
-              </select>
-            </div>
-            <div>
-              <label>Select Make</label>
-              <select
-                value={make}
-                onChange={(e) => setMake(e.target.value)}
-                className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
-              >
-                <option value="Bentley">Bentley</option>
+                <option value="">All Types</option>
+                    <option value="hatchBack">Hatchback</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
                 {/* Add more makes */}
               </select>
             </div>
             <div>
-              <label>Select Model</label>
+              <label>Select Gearbox</label>
               <select
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                name="gearBox" value={filters.gearBox} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               >
-                <option value="Bentayga">Bentayga</option>
-                {/* Add more models */}
+                <option value="">All Gearboxes</option>
+                <option value="manual">Manual</option>
+                <option value="automatic">Automatic</option>
               </select>
             </div>
             <div>
-              <label>Select Mileage</label>
+              <label>Select Engine</label>
               <select
-                value={mileage}
-                onChange={(e) => setMileage(e.target.value)}
+                name="engine"
+                value={filters.engine} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               >
-                <option value="20000">≤ 20000</option>
-                {/* Add more mileage options */}
-              </select>
-            </div>
-            <div>
-              <label>Select Transmission</label>
-              <select
-                value={transmission}
-                onChange={(e) => setTransmission(e.target.value)}
-                className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
-              >
-                <option value="7-Speed Automatic">7-Speed Automatic</option>
-                {/* Add more transmission options */}
+                <option value="">All Engines</option>
+                <option value="diesel">Diesel</option>
+                <option value="petrol">Petrol</option>
+                <option value="electric">Electric</option>
               </select>
             </div>
             <div>
               <label>Select Condition</label>
               <select
-                value={condition}
-                onChange={(e) => setCondition(e.target.value)}
+                name="conditionType"
+                value={filters.conditionType} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               >
-                <option value="New">New</option>
-                {/* Add more conditions */}
+                <option value="">All Conditions</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
               </select>
             </div>
-          </div>
-          <div className="flex justify-between items-center mt-4">
-            <span className="text-lg">${price[0]} - ${price[1]}</span>
-            <input
-              type="range"
-              min="7900"
-              max="2599100"
-              value={price[1]}
-              onChange={(e) => setPrice([7900, e.target.value])}
-              className="w-full h-2 bg-red-400 rounded-lg cursor-pointer"
-            />
           </div>
           <div className="flex justify-center mt-6">
             <button
