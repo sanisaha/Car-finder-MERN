@@ -5,19 +5,20 @@ import { AuthContext } from '../../../Context/AuthProvider';
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
     const menuItems = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/blog'>Blogs</Link></li>
-    </>
-    const privateMenuItems = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/blog'>Blog</Link></li>
-        <li><Link to='/dashboard'>Dashboard</Link></li>
-    </>
+    <li className="hover:bg-green-600 block my-4"><Link to="/">Home</Link></li>
+    <li className="hover:bg-green-600 block my-4"><Link to="/blog">Blogs</Link></li>
+</>;
+
+const privateMenuItems = <>
+    <li className="hover:bg-green-600 block my-4"><Link to="/">Home</Link></li>
+    <li className="hover:bg-green-600 block my-4"><Link to="/blog">Blog</Link></li>
+    <li className="hover:bg-green-600 block my-4"><Link to="/dashboard">Dashboard</Link></li>
+</>;
     const handleLogOut = () => {
         logOut();
     }
     return (
-        <div className="navbar bg-black text-white">
+        <div className="navbar bg-black text-white py-4">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -32,7 +33,7 @@ const Header = () => {
                         }
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">FourWheeler</a>
+                <p className="btn btn-ghost normal-case text-xl">FourWheeler</p>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { baseURL } from '../../../../Context/AuthProvider';
 const Checkout = ({ booking }) => {

@@ -25,7 +25,6 @@ const Payment = () => {
                     />
                 </Elements>
             </div>
-            <ToastContainer></ToastContainer>
         </div>
     );
 };

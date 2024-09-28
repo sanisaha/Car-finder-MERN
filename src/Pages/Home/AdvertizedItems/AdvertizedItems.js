@@ -2,30 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AdvertizedItems = ({ advertizeItem }) => {
-    const { _id, resalePrice, name, picture, gearBox } = advertizeItem;
+    const { _id, resalePrice, name, photoURL, gearBox, engine, conditionType } = advertizeItem;
+
     return (
-        <div className=''>
-            <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <img className="p-8 rounded-t-lg" src={picture} alt="" />
-                <div className="px-5 pb-5">
-                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{name}</h5>
-                    <div className="flex items-center mt-2.5 mb-5">
-                        <div className="rating">
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" checked />
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                        </div>
-                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
+        <div className="">
+            <div className="w-full bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <img className="rounded-t-lg h-60 w-full object-cover" src={photoURL} alt={name} />
+                <div className="px-5 py-4">
+                    <h5 className="text-2xl font-semibold text-gray-800 mb-2">{name}</h5>
+                    <div className="flex justify-between items-center mb-4">
+                        <span className="text-lg font-bold text-red-600">${resalePrice}</span>
+                        <span className={`text-sm font-medium px-3 py-1 rounded-full ${conditionType === 'excellent' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                            {conditionType.charAt(0).toUpperCase() + conditionType.slice(1)}
+                        </span>
                     </div>
-                    <div className="flex items-center justify-between">
-                        <span className="text-3xl font-bold text-gray-900 dark:text-white">${resalePrice}</span>
-                        <Link to={`/carItems`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Explore</Link>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm text-gray-500">Gearbox: <strong>{gearBox}</strong></span>
+                        <span className="text-sm text-gray-500">Engine: <strong>{engine}</strong></span>
+                    </div>
+                    <div className="flex justify-center">
+                        <Link
+                            to={`/cars/${_id}`}
+                            className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-red-400"
+                        >
+                            Explore
+                        </Link>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

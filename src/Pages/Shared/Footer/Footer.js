@@ -11,7 +11,7 @@ const Footer = () => {
                 </div>
             </div>
             <div>
-                <p>Copyright © 2022 - All right reserved by Car-Finder</p>
+                <p>Copyright © 2023 - All right reserved by FourWheeler</p>
             </div>
         </footer>
     );

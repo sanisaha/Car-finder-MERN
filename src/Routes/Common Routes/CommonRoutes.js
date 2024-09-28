@@ -2,19 +2,18 @@ import { baseURL } from "../../Context/AuthProvider";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main/Main";
 import Blog from "../../Pages/Blogs/Blog";
-import CarsWithCategory from "../../Pages/CarCategory/CarsWithCategory";
 import Login from "../../Pages/Credentials/Login/Login";
 import Register from "../../Pages/Credentials/Register/Register";
 import MyDashboard from "../../Pages/DashBoard/MyDashboard/MyDashboard";
-import MyOrders from "../../Pages/DashBoard/MyOrders/MyOrders";
 import MySellers from "../../Pages/DashBoard/MySellers/MySellers";
 import MyUsers from "../../Pages/DashBoard/MyUsers/MyUsers";
 import Payment from "../../Pages/DashBoard/Payment/Payment/Payment";
 import AddAProduct from "../../Pages/DashBoard/Sellers/AddAProduct/AddAProduct";
-import Myproducts from "../../Pages/DashBoard/Sellers/MyProducts/Myproducts";
+import MyProducts from "../../Pages/DashBoard/Sellers/MyProducts/MyProducts";
 import Home from "../../Pages/Home/Home/Home";
 import Error from "../../Pages/Other/Error";
-import PrivateRoutes from "../Private Routes/PrivateRoutes";
+import ProductDetailPage from "../../Pages/ProductDetails/ProductDetailPage";
+import SearchPage from "../../Pages/SearchPage/SearchPage";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -26,18 +25,22 @@ const router = createBrowserRouter([{
         element: <Home></Home>
     },
     {
-        path: '/carItems',
-        element: <CarsWithCategory></CarsWithCategory>,
-        loader: () => fetch(`${baseURL}/advertize`)
-    },
-    {
         path: '/login',
         element: <Login></Login>
     },
     {
         path: '/register',
         element: <Register></Register>
-    }]
+    },
+    {
+        path: '/search',
+        element: <SearchPage></SearchPage>,
+    },
+    {
+        path: '/cars/:id',
+        element: <ProductDetailPage></ProductDetailPage>,
+    },
+]
 },
 {
     path: '/dashboard',
@@ -56,8 +59,8 @@ const router = createBrowserRouter([{
         element: <MySellers></MySellers>
     },
     {
-        path: '/dashboard/myproducts',
-        element: <Myproducts></Myproducts>
+        path: '/dashboard/myProducts',
+        element: <MyProducts></MyProducts>
     },
     {
         path: '/dashboard/add',
