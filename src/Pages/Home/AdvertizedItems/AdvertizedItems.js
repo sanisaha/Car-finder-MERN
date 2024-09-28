@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AdvertizedItems = ({ advertizeItem }) => {
-    const { _id, resalePrice, name, picture, gearBox, engine, conditionType } = advertizeItem;
+    const { _id, resalePrice, name, photoURL, gearBox, engine, conditionType } = advertizeItem;
 
     return (
         <div className="">
             <div className="w-full bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <img className="rounded-t-lg h-60 w-full object-cover" src={picture} alt={name} />
+                <img className="rounded-t-lg h-60 w-full object-cover" src={photoURL} alt={name} />
                 <div className="px-5 py-4">
                     <h5 className="text-2xl font-semibold text-gray-800 mb-2">{name}</h5>
                     <div className="flex justify-between items-center mb-4">

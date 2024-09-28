@@ -43,7 +43,7 @@ const DashboardLayout = () => {
     </>
     const sellerMenu = <>
         <li>
-            <Link to='/dashboard/myproducts'>
+            <Link to='/dashboard/myProducts'>
                 <FaList />
                 My Products
             </Link>

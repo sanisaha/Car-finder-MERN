@@ -8,7 +8,7 @@ const CarItemCard = ({ latestProduct }) => {
       {/* Car Image */}
       <div className="relative h-64">
         <img
-          src={latestProduct.picture || carImage}
+          src={latestProduct?.photoURL || carImage}
           alt={latestProduct.name}
           className="absolute inset-0 h-full w-full object-cover rounded-t-lg transform group-hover:scale-105 transition-transform duration-300"
         />

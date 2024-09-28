@@ -1,160 +1,169 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext, baseURL } from '../../../../Context/AuthProvider';
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const [availableProducts, setAvailAbleProducts] = useState([]);
+    const [availableProducts, setAvailableProducts] = useState([]);
     const [bookedProducts, setBookedProducts] = useState([]);
-    useEffect(() => {
-        fetch(`${baseURL}/cars/${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
 
-                setAvailAbleProducts(data);
-            })
-    }, [user])
     useEffect(() => {
-        fetch(`${baseURL}/bookedItems/${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
+        if (user?.email) {
+            fetchAvailableProducts();
+            fetchBookedProducts();
+        }
+    }, [user]);
 
-                setBookedProducts(data);
-            })
-    }, [user])
-    const handleCompleteDelete = (id) => {
-        const proceed = window.confirm('are you really want to delete')
-        if (proceed) {
-            fetch(`${baseURL}/cars/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.deletedCount > 0) {
-                        toast("Review deleted successfully");
-                    }
-                })
-                .catch(e => console.error(e))
+    const fetchAvailableProducts = async () => {
+        try {
+            const response = await fetch(`${baseURL}/cars/${user?.email}`);
+            const data = await response.json();
+            setAvailableProducts(data);
+        } catch (error) {
+            console.error("Error fetching available products:", error);
         }
-    }
-    const handleDeleteFromBooking = (id) => {
-        const proceed = window.confirm('are you really want to delete')
-        if (proceed) {
-            fetch(`${baseURL}/bookedItems/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.deletedCount > 0) {
-                        toast("Review deleted successfully");
-                    }
-                })
-                .catch(e => console.error(e))
+    };
+
+    const fetchBookedProducts = async () => {
+        try {
+            const response = await fetch(`${baseURL}/bookedItems/${user?.email}`);
+            const data = await response.json();
+            setBookedProducts(data);
+        } catch (error) {
+            console.error("Error fetching booked products:", error);
         }
-    }
-    const handleAdvertize = (id) => {
-        const action = { advertize: 'advertize' };
-        fetch(`${baseURL}/cars/item/${id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(action)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    alert('item set for advertize')
+    };
+
+    const handleDelete = async (id, url, successMessage) => {
+        const proceed = window.confirm('Are you sure you want to delete this item?');
+        if (proceed) {
+            try {
+                const response = await fetch(`${baseURL}/${url}/${id}`, { method: 'DELETE' });
+                const result = await response.json();
+                if (result.deletedCount > 0) {
+                    toast(successMessage);
+                    // Re-fetch products after deletion
+                    fetchAvailableProducts();
+                    fetchBookedProducts();
                 }
+            } catch (error) {
+                console.error("Error deleting item:", error);
+            }
+        }
+    };
 
-            })
-
-    }
+    const handleAdvertize = async (id) => {
+        const action = { advertize: 'advertize' };
+        try {
+            const response = await fetch(`${baseURL}/cars/item/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(action),
+            });
+            const result = await response.json();
+            if (result.modifiedCount > 0) {
+                toast('Product set for advertisement');
+                fetchAvailableProducts(); // Refresh list after update
+            }
+        } catch (error) {
+            console.error("Error advertising product:", error);
+        }
+    };
 
     return (
-        <div>
-            <div>
-                <h2>Available Products</h2>
-            </div>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>product</th>
-                            <th>price</th>
-                            <th>phone</th>
-                            <th>status</th>
-                            <th>action</th>
-                            <th>option</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            availableProducts.map((product, index) =>
-                                <tr key={index}>
-                                    <th>{index + 1}</th>
+        <div className="container mx-auto p-4">
+            <ToastContainer />
+            <section>
+                <h2 className="text-xl font-bold mb-4">Available Products</h2>
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full text-left">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {availableProducts.map((product, index) => (
+                                <tr key={product._id} className="border-t">
+                                    <td>{index + 1}</td>
                                     <td>{product.name}</td>
                                     <td>{product.resalePrice} $</td>
                                     <td>{product.mobileNumber}</td>
                                     <td>Available</td>
-                                    <td><button className='btn btn-sm btn-primary' onClick={() => (handleCompleteDelete(product._id))}>delete</button></td>
-                                    <td>{
-                                        !product.action && <>
-                                            <button className='btn btn-sm btn-primary' onClick={() => (handleAdvertize(product._id))}>Advertize</button>
-                                        </>
-                                    }</td>
+                                    <td>
+                                        <button 
+                                            className="btn btn-sm btn-danger mr-2"
+                                            onClick={() => handleDelete(product._id, 'cars', 'Product deleted successfully')}
+                                        >
+                                            Delete
+                                        </button>
+                                        {!product.action && (
+                                            <button 
+                                                className="btn btn-sm btn-success"
+                                                onClick={() => handleAdvertize(product._id)}
+                                            >
+                                                Advertize
+                                            </button>
+                                        )}
+                                    </td>
                                 </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <div>
-                    <h2>Booked Products</h2>
-                </div>
-                <div className="overflow-x-auto">
-                    <table className="table w-full">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>product</th>
-                                <th>price</th>
-                                <th>phone</th>
-                                <th>status</th>
-                                <th>action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                bookedProducts.map((product, index) =>
-                                    <tr key={index}>
-                                        <th>{index + 1}</th>
-                                        <td>{product.carName}</td>
-                                        <td>{product.price} $</td>
-                                        <td>{product.phoneNumber}</td>
-                                        <td>{product.paid ? <><button className='btn btn-sm btn-primary disabled'>Sold</button></>
-                                            :
-                                            <><button className='btn btn-sm btn-primary disabled'>Booked</button></>
-                                        }
-                                        </td>
-                                        <td>{product.paid ? <><button className='btn btn-sm btn-primary disabled'></button></>
-                                            :
-                                            <><button className='btn btn-sm btn-primary' onClick={() => (handleDeleteFromBooking(product._id))}>delete</button></>
-                                        }
-                                        </td>
-
-                                    </tr>
-                                )
-                            }
+                            ))}
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
+
+            <section className="mt-8">
+                <h2 className="text-xl font-bold mb-4">Booked Products</h2>
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full text-left">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {bookedProducts.map((product, index) => (
+                                <tr key={product._id} className="border-t">
+                                    <td>{index + 1}</td>
+                                    <td>{product.carName}</td>
+                                    <td>{product.price} $</td>
+                                    <td>{product.phoneNumber}</td>
+                                    <td>
+                                        {product.paid ? (
+                                            <span className="text-green-600 font-bold">Sold</span>
+                                        ) : (
+                                            <span className="text-yellow-600 font-bold">Booked</span>
+                                        )}
+                                    </td>
+                                    <td>
+                                        {!product.paid && (
+                                            <button
+                                                className="btn btn-sm btn-danger"
+                                                onClick={() => handleDelete(product._id, 'bookedItems', 'Booked item deleted successfully')}
+                                            >
+                                                Delete
+                                            </button>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    )
+    );
 };
+
 export default MyProducts;

@@ -33,7 +33,7 @@ const RelatedItemPage = ({engineType}) => {
                     <div key={car._id} className="border rounded-lg p-4 shadow hover:shadow-lg transition duration-300">
                         <Link to={`/cars/${car._id}`}>
                             <img
-                                src={car.picture || productImage}
+                                src={car.photoURL || productImage}
                                 alt={car.name}
                                 className="w-full h-48 object-cover mb-4 rounded-lg"
                             />

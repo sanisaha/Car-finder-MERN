@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import AdvertizedItems from '../AdvertizedItems/AdvertizedItems';
 import Banner from '../Banner/Banner';
-import ItemCategory from '../ItemCategory/ItemCategory';
-import LatestProducts from '../LatestProducts/LatestProducts';
-import CategoryProducts from '../LatestProducts/CategoryProducts';
 import { baseURL } from '../../../Context/AuthProvider';
 import { Link } from 'react-router-dom';
 import CarItemCard from '../../../components/CarItemCard';
 
 const Home = () => {
     const [advertizeItems, setAdvertizeItems] = useState([]);
-    const [category, setCategory] = useState('');
-
     useEffect(() => {
         fetch(`${baseURL}/latest`)
             .then(res => res.json())
@@ -50,8 +45,6 @@ const Home = () => {
   </div>
 </section>
 <div className="py-4"></div>
-
-
                 {/* Advertised Items Section */}
                 {advertizeItems.length > 0 && (
     <section className="bg-gradient-to-r from-red-300 to-red-100 py-12 rounded-lg shadow-lg">

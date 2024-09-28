@@ -34,7 +34,7 @@ const ProductDetailPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex justify-center items-center">
                     <img
-                        src={product.picture || productImage}
+                        src={product.photoURL || productImage}
                         alt={product.name}
                         className="rounded-lg shadow-lg w-full max-w-lg transition-transform transform hover:scale-105 duration-300"
                     />
@@ -57,9 +57,18 @@ const ProductDetailPage = () => {
 
                     {/* Action Buttons */}
                     <div className="mt-6">
-                        <button onClick={() => setShowModal(true)} className="inline-block bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300 mr-4">
-                            Make an Offer
-                        </button>
+                        {user ? 
+                    (<button onClick={() => setShowModal(true)} className="inline-block bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300 mr-4">
+                    Make an Offer
+                </button>)  : (
+                            <Link
+                                to="/login"
+                                className="inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+                            >
+                                Login to Book
+                            </Link> 
+                        )  
+                    }
                     </div>
                 </div>
             </div>

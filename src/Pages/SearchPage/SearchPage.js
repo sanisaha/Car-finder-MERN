@@ -207,7 +207,7 @@ const SearchPage = () => {
               cars.map((car) => (
                 <div key={car._id} className="flex items-center justify-between p-4 border-b">
                   <div className="border p-4 rounded-lg">
-                    <img src={car.picture} alt={car.name} className="w-full h-auto rounded-lg" />
+                    <img src={car.photoURL} alt={car.name} className="w-full h-auto rounded-lg" />
                     <div className="flex justify-between items-center mt-4">
                       <div>
                         <h3 className="text-lg font-bold">{car.name}</h3>
@@ -215,7 +215,7 @@ const SearchPage = () => {
                           <del>${car.originalPrice}</del> <span className="text-red-600">${car.resalePrice}</span>
                         </p>
                       </div>
-                      <Link to={`/car/${car._id}`} className="p-2 bg-black text-white rounded-md">
+                      <Link to={`/cars/${car._id}`} className="p-2 bg-black text-white rounded-md">
                         Show Details
                       </Link>
                     </div>
