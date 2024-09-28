@@ -5,7 +5,7 @@ import useBuyer from '../../../Hooks/useBuyer';
 import useSeller from '../../../Hooks/useSeller';
 import MyOrders from '../MyOrders/MyOrders';
 import MyUsers from '../MyUsers/MyUsers';
-import Myproducts from '../Sellers/MyProducts/MyProducts';
+import MyProducts from '../Sellers/MyProducts/MyProducts';
 
 const MyDashboard = () => {
     const { user } = useContext(AuthContext);
@@ -30,7 +30,7 @@ const MyDashboard = () => {
             }
             {
                 isSeller && <>
-                    <Myproducts></Myproducts>
+                    <MyProducts></MyProducts>
                 </>
             }
             {

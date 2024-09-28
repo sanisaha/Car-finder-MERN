@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import banner from '../../../assets/images/banner.png'
 import { useNavigate } from 'react-router-dom';
 import carImage from '../../../assets/images/banner_1920.webp';
 
