@@ -65,7 +65,7 @@ const Home = () => {
         </div>
         <div className="text-center mt-6">
             <Link
-                to="/all-deals"
+                to="/search"
                 className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-red-400"
             >
                 View All Deals

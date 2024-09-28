@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import productImage from '../../assets/images/banner_480.webp';
 import { AuthContext, baseURL } from '../../Context/AuthProvider';
 import BookingACar from '../CarCategory/BookingACar/BookingACar';
+import RelatedItemPage from '../../components/RelatedItemPage';
 
 const ProductDetailPage = () => {
     const { id } = useParams();
@@ -27,10 +28,6 @@ const ProductDetailPage = () => {
     if (!product) {
         return <div className="flex justify-center items-center h-screen text-xl">Loading...</div>;
     }
-
-    const handleMakeOfferClick = () => {
-        setShowModal(true); // Show modal when "Make an Offer" is clicked
-    };
 
     return (
         <div className="container mx-auto p-6 bg-white rounded-lg shadow-md mt-6">
@@ -60,16 +57,21 @@ const ProductDetailPage = () => {
 
                     {/* Action Buttons */}
                     <div className="mt-6">
-                        <button onClick={handleMakeOfferClick} className="inline-block bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300 mr-4">
+                        <button onClick={() => setShowModal(true)} className="inline-block bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300 mr-4">
                             Make an Offer
                         </button>
                     </div>
                 </div>
             </div>
 
+            <RelatedItemPage engineType = {product.engine}  />
+
             {/* Modal for Booking a Car */}
             {showModal && (
-                <BookingACar carItem={product} setCarItem={setShowModal} />
+                <BookingACar
+                    carItem={product} // Pass the product to BookingACar
+                    onClose={() => setShowModal(false)}
+                />
             )}
         </div>
     );

@@ -101,6 +101,7 @@ const MyProducts = () => {
                 <select name='type' className="select select-accent input input-bordered w-3/5 mb-2">
                     <option>sedan</option>
                     <option>hatchBack</option>
+                    <option>SUV</option>
                 </select>
             </div>
             <div>
@@ -108,6 +109,7 @@ const MyProducts = () => {
                 <select name='engine' className="select select-accent input input-bordered w-3/5 mb-2">
                     <option>petrol</option>
                     <option>diesel</option>
+                    <option>electric</option>
                 </select>
             </div>
             <div>
