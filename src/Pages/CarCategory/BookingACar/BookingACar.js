@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { AuthContext, baseURL } from '../../../Context/AuthProvider';
 
@@ -45,8 +44,8 @@ const BookingACar = ({ carItem, onClose }) => {
                                     .then(res => res.json())
                                     .then(data => {
                                         if (data.deletedCount > 0) {
-                                            onClose(); // Close the modal
                                             toast('Your booking is confirmed');
+                                            onClose(); // Close the modal
                                         }
                                     })
                             }

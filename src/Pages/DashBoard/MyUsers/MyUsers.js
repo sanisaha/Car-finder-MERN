@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import { baseURL } from '../../../Context/AuthProvider';
@@ -72,7 +71,6 @@ const MyUsers = () => {
                     }
                 </tbody>
             </table>
-            <ToastContainer></ToastContainer>
         </div>
     );
 };

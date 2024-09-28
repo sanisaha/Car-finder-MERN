@@ -26,7 +26,6 @@ const CarsWithCategory = () => {
                     ></BookingACar>
                 }
             </div>
-            <ToastContainer></ToastContainer>
         </section>
     );
 };

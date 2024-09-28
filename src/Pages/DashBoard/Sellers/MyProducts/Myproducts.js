@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext, baseURL } from '../../../../Context/AuthProvider';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 
@@ -155,7 +154,6 @@ const MyProducts = () => {
                     </table>
                 </div>
             </div>
-            <ToastContainer></ToastContainer>
         </div>
     )
 };

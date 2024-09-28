@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import { AuthContext, baseURL } from '../../../../Context/AuthProvider';
@@ -133,7 +132,6 @@ const MyProducts = () => {
             <div className='py-5'>
                 <input className='btn btn-submit' type="submit" value="Add Product" />
             </div>
-            <ToastContainer />
 
         </form>
     );
