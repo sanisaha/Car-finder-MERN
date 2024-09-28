@@ -6,6 +6,7 @@ import { AuthContext, baseURL } from '../../../Context/AuthProvider';
 const BookingACar = ({ carItem, setCarItem }) => {
     const { user } = useContext(AuthContext);
     const { _id, name, resalePrice, sellerEmail, picture } = carItem;
+
     const handleCarBooking = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -16,6 +17,7 @@ const BookingACar = ({ carItem, setCarItem }) => {
         const phoneNumber = form.phoneNumber.value;
         const price = form.price.value;
         const newBooking = { userName, sellerEmail, picture, carName, email, meetingPlace, phoneNumber, price };
+
         fetch(`${baseURL}/bookings`, {
             method: 'POST',
             headers: {
@@ -42,24 +44,29 @@ const BookingACar = ({ carItem, setCarItem }) => {
                                     .then(res => res.json())
                                     .then(data => {
                                         if (data.deletedCount > 0) {
-                                            setCarItem(null);
-                                            toast('your booking is confirmed');
+                                            setCarItem(null); // Close the modal
+                                            toast('Your booking is confirmed');
                                         }
                                     })
                             }
                         })
-
                 }
             })
             .catch(e => console.error(e))
+    };
 
-    }
     return (
         <div>
             <input type="checkbox" id="car-booking-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
-                    <label htmlFor="car-booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label 
+                        htmlFor="car-booking-modal" 
+                        className="btn btn-sm btn-circle absolute right-2 top-2" 
+                        onClick={() => setCarItem(null)} // Close the modal
+                    >
+                        ✕
+                    </label>
                     <h3 className="text-lg font-bold text-center">{name}</h3>
                     <form onSubmit={handleCarBooking} className="card-body">
                         <div className="form-control">
