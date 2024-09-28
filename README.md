@@ -4,6 +4,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-lightgreen)
 ![Firebase](https://img.shields.io/badge/Firebase-orange)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_css-lightblue)
+![stripe](https://img.shields.io/badge/Stripe-pink)
 
 # 🚗 FourWheeler - Second Hand Car Buy and Sell Platform
 
@@ -17,7 +18,7 @@ Explore the live deployment of the project by visiting [FourWheeler](https://fou
 
 The backend repository handles all server-side logic, database interactions, and API endpoints necessary to support the FourWheeler platform. Built NodeJs, Express and MongoDB.
 
-## You can find the backend repository at the following link: [FourWheeler Backend Repo](https://github.com/sanisaha/car-finder-server-MERN).
+You can find the backend repository at the following link: [FourWheeler Backend Repo](https://github.com/sanisaha/car-finder-server-MERN).
 
 ## Table of Contents
 
