@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import carImage from '../../../assets/images/banner_1920.webp';
+import banner1ExtraLarge from '../../../assets/images/banner_1920.webp';
+import banner1Large from '../../../assets/images/banner_1280.webp';
+import banner1Medium from '../../../assets/images/banner_768.webp';
+import banner1Small from '../../../assets/images/banner_480.webp';
 
 const Banner = () => {
     const navigate = useNavigate();
@@ -25,22 +28,45 @@ const Banner = () => {
     navigate("/search", { state: { filters } });
   };
     return (
-        <div className="relative">
+        <div className="relative z-10">
       {/* Cover Section */}
-      <div className="relative h-screen bg-red-600">
+      <div className="relative h-[50vh] xl:h-[80vh] bg-red-600">
         <div className="absolute inset-0 flex items-center justify-center">
-          <img
-            src={carImage}
-            alt="Car"
-            className="w-3/4 h-auto"
+        <picture>
+          <source
+            srcSet={banner1ExtraLarge}
+            media="(min-width: 1280px)"
+            type="image/webp"
           />
+          <source
+            srcSet={banner1Large}
+            media="(min-width: 1024px) and (max-width: 1279px)"
+            type="image/webp"
+          />
+          <source
+            srcSet={banner1Medium}
+            media="(min-width: 768px) and (max-width: 1024px)"
+            type="image/webp"
+          />
+          <source
+            srcSet={banner1Small}
+            media="(max-width: 767px)"
+            type="image/webp"
+          />
+          <img
+            src={banner1ExtraLarge}
+            alt="car-banner"
+            className="object-cover w-full h-full"
+          />
+        </picture>
         </div>
         {/* Submerged Search Section */}
-        <div className="absolute inset-x-0 bottom-0 left-1/2 transform translate-x-[-50%] translate-y-1/2 p-4 w-3/4 mx-auto bg-white shadow-md">
+        <div className="absolute inset-x-0 bottom-0 left-1/2 transform translate-x-[-50%] translate-y-2/3 p-4 w-3/4 mx-auto bg-white shadow-md">
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label>Select Type</label>
+              <label htmlFor="selectType">Select Type</label>
               <select
+              id="selectType"
                 name="type" value={filters.type} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               >
@@ -52,8 +78,9 @@ const Banner = () => {
               </select>
             </div>
             <div>
-              <label>Select Gearbox</label>
+              <label htmlFor="selectGearbox">Select Gearbox</label>
               <select
+                id="selectGearbox"
                 name="gearBox" value={filters.gearBox} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
               >
@@ -63,8 +90,9 @@ const Banner = () => {
               </select>
             </div>
             <div>
-              <label>Select Engine</label>
+              <label htmlFor='selectEngine'>Select Engine</label>
               <select
+                id="selectEngine"
                 name="engine"
                 value={filters.engine} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"
@@ -76,8 +104,9 @@ const Banner = () => {
               </select>
             </div>
             <div>
-              <label>Select Condition</label>
+              <label htmlFor='selectCondition'>Select Condition</label>
               <select
+                id="selectCondition"
                 name="conditionType"
                 value={filters.conditionType} onChange={handleChange}
                 className="block w-full mt-1 border-gray-300 rounded-md shadow-sm"

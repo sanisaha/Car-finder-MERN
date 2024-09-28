@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Header = () => {
@@ -18,7 +18,7 @@ const privateMenuItems = <>
         logOut();
     }
     return (
-        <div className="navbar bg-black text-white py-4">
+        <div className="navbar bg-black text-white py-4 z-50 relative">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
