@@ -2,7 +2,6 @@ import { baseURL } from "../../Context/AuthProvider";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main/Main";
 import Blog from "../../Pages/Blogs/Blog";
-import CarsWithCategory from "../../Pages/CarCategory/CarsWithCategory";
 import Login from "../../Pages/Credentials/Login/Login";
 import Register from "../../Pages/Credentials/Register/Register";
 import MyDashboard from "../../Pages/DashBoard/MyDashboard/MyDashboard";
@@ -24,11 +23,6 @@ const router = createBrowserRouter([{
     children: [{
         path: '/',
         element: <Home></Home>
-    },
-    {
-        path: '/carItems',
-        element: <CarsWithCategory></CarsWithCategory>,
-        loader: () => fetch(`${baseURL}/advertize`)
     },
     {
         path: '/login',
